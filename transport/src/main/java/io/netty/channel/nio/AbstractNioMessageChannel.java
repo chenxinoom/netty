@@ -59,7 +59,7 @@ public abstract class AbstractNioMessageChannel extends AbstractNioChannel {
 
         private final List<Object> readBuf = new ArrayList<Object>();
 
-        @Override
+        @Override //这个是NioServerSocket的读方法
         public void read() {
             assert eventLoop().inEventLoop();
             final ChannelConfig config = config();

@@ -40,7 +40,7 @@ import static io.netty.channel.internal.ChannelUtils.WRITE_STATUS_SNDBUF_FULL;
 /**
  * {@link AbstractNioChannel} base class for {@link Channel}s that operate on bytes.
  */
-public abstract class AbstractNioByteChannel extends AbstractNioChannel {
+public abstract class AbstractNioByteChannel extends AbstractNioChannel { //这个NioSocketChannel对象
     private static final ChannelMetadata METADATA = new ChannelMetadata(false, 16);
     private static final String EXPECTED_TYPES =
             " (expected: " + StringUtil.simpleClassName(ByteBuf.class) + ", " +
@@ -163,7 +163,7 @@ public abstract class AbstractNioByteChannel extends AbstractNioChannel {
 
                     allocHandle.incMessagesRead(1);
                     readPending = false;
-                    pipeline.fireChannelRead(byteBuf);
+                    pipeline.fireChannelRead(byteBuf);//刚才在这
                     byteBuf = null;
                 } while (allocHandle.continueReading());
 

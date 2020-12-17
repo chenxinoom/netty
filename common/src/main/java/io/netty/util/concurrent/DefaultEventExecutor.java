@@ -60,13 +60,17 @@ public final class DefaultEventExecutor extends SingleThreadEventExecutor {
 
     @Override
     protected void run() {
+        //是个死循环
         for (;;) {
+            //获取任务
             Runnable task = takeTask();
             if (task != null) {
+                //提交的任务逻辑
                 task.run();
                 updateLastExecutionTime();
             }
 
+            //这个每次任务都会执行?
             if (confirmShutdown()) {
                 break;
             }

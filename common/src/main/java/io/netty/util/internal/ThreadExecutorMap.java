@@ -41,6 +41,7 @@ public final class ThreadExecutorMap {
      * Set the current {@link EventExecutor} that is used by the {@link Thread}.
      */
     private static void setCurrentEventExecutor(EventExecutor executor) {
+        //这是个ThreadLocal 这个线程的对应的线程池为EventExecutor
         mappings.set(executor);
     }
 
@@ -66,9 +67,11 @@ public final class ThreadExecutorMap {
     public static Runnable apply(final Runnable command, final EventExecutor eventExecutor) {
         ObjectUtil.checkNotNull(command, "command");
         ObjectUtil.checkNotNull(eventExecutor, "eventExecutor");
+        //
         return new Runnable() {
             @Override
             public void run() {
+                //把创建的eventExecutor设置 到 ThreadLocal
                 setCurrentEventExecutor(eventExecutor);
                 try {
                     command.run();

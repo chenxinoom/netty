@@ -27,6 +27,7 @@ import java.util.concurrent.TimeUnit;
  * life-cycle and allows shutting them down in a global fashion.
  *
  */
+//管理EventExecutor 也是他的父类
 public interface EventExecutorGroup extends ScheduledExecutorService, Iterable<EventExecutor> {
 
     /**
@@ -40,6 +41,7 @@ public interface EventExecutorGroup extends ScheduledExecutorService, Iterable<E
      *
      * @return the {@link #terminationFuture()}
      */
+    //异步方法 优雅的关闭 根据时间来关闭
     Future<?> shutdownGracefully();
 
     /**
@@ -62,6 +64,7 @@ public interface EventExecutorGroup extends ScheduledExecutorService, Iterable<E
      * Returns the {@link Future} which is notified when all {@link EventExecutor}s managed by this
      * {@link EventExecutorGroup} have been terminated.
      */
+    //一个终止任务
     Future<?> terminationFuture();
 
     /**

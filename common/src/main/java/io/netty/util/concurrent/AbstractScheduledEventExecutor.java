@@ -43,6 +43,8 @@ public abstract class AbstractScheduledEventExecutor extends AbstractEventExecut
        public void run() { } // Do nothing
     };
 
+   //这是调度队列
+    //这个队列和阻塞队列不一样 子类中有阻塞队列的任务队列
     PriorityQueue<ScheduledFutureTask<?>> scheduledTaskQueue;
 
     long nextTaskId;

@@ -20,6 +20,7 @@ import io.netty.util.internal.ObjectUtil;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ThreadFactory;
 
+//这是线程工厂 所有EventExecutor的线程池任务都是在这个线程中执行
 public final class ThreadPerTaskExecutor implements Executor {
     private final ThreadFactory threadFactory;
 
@@ -29,6 +30,7 @@ public final class ThreadPerTaskExecutor implements Executor {
 
     @Override
     public void execute(Runnable command) {
+        //创建线程 并执行SingleThreadEventExecutor中的提交的任务逻辑执行
         threadFactory.newThread(command).start();
     }
 }

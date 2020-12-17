@@ -22,6 +22,12 @@ package io.netty.util.concurrent;
  * way to access methods.
  *
  */
+//EventExector框架能够能满足Netty的一些额外需求，个人认为主要有两点：
+//1.能够精确控制任务执行的线程；
+//2.将任务执行与IO事件处理融合起来，放入一个统一的executor框架内。
+//在设计实现层面，EventExector模块和网络通信并没有紧耦合，它是一个中立的框架，可以被单独使用。
+
+    //单个线程执行 定时任务调度 和 阻塞任务都可以实现
 public interface EventExecutor extends EventExecutorGroup {
 
     /**
@@ -38,6 +44,7 @@ public interface EventExecutor extends EventExecutorGroup {
     /**
      * Calls {@link #inEventLoop(Thread)} with {@link Thread#currentThread()} as argument
      */
+    //是否在该线程中执行
     boolean inEventLoop();
 
     /**
